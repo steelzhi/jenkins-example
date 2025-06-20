@@ -33,14 +33,14 @@ pipeline {
 
         stage('Сборка проекта') {
             steps {
-                sh '.\gradlew clean build -x test'
+                sh 'gradle clean build -x test'
             }
         }
 
         stage('Запуск тестов') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh '.\gradlew test'
+                    sh 'gradle test'
                 }
             }
             post {
