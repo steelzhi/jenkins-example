@@ -5,8 +5,8 @@ pipeline {
         PROJECT_NAME = 'jenkins-example'
         REPORT_DIR = 'build/test-results/test'
         JACOCO_HTML = 'build/reports/jacoco/test/html'
-        EMAIL_RECIPIENTS = 'team_email@yandex.ru' // нужно заменить на валидный email
-        EMAIL_FROM = 'your_email@yandex.ru' // нужно заменить на валидный email
+        EMAIL_RECIPIENTS = 'zhi13@yandex.ru' // нужно заменить на валидный email
+        EMAIL_FROM = 'zhi13@yandex.ru' // нужно заменить на валидный email
         EMAIL_SUBJECT = 'Результат сборки Jenkins'
         TELEGRAM_CHAT_ID = credentials('TELEGRAM_CHAT_ID')
         TELEGRAM_TOKEN = credentials('TELEGRAM_TOKEN')
@@ -33,14 +33,14 @@ pipeline {
 
         stage('Сборка проекта') {
             steps {
-                sh './gradlew clean build -x test'
+                sh '.\\gradlew clean build -x test'
             }
         }
 
         stage('Запуск тестов') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh './gradlew test'
+                    sh '.\\gradlew test'
                 }
             }
             post {
